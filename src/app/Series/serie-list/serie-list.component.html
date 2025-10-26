@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <h2>Listado de Series</h2>
+
+  <div class="row">
+
+    <div class="col-md-6">
+      <ul class="list-group">
+        <li *ngFor="let serie of series" 
+            class="list-group-item list-group-item-action"
+            [class.active]="serie === selectedSerie"
+            (click)="onSelect(serie)">
+          {{ serie.id }}
+          {{ serie.name }}
+          {{ serie.channel }}
+          {{ serie.seasons }}
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="col-md-6" *ngIf="selectedSerie">
+      <div class="card">
+        <div class="card-header">
+          Detalles de la serie
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><img [src]="selectedSerie.poster"class="img-fluid mb-3" alt="{{selectedSerie.name}}"></h5>
+          <p> {{ selectedSerie.name }}</p>
+          <a [href]="selectedSerie.webpage" target="_blank">Ver más</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3 alert alert-info">
+    Promedio de temporadas: {{ getAverageSeasons() | number:'1.1-2' }}
+  </div>
+</div>
